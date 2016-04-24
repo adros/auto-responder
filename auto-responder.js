@@ -4,8 +4,7 @@ var fs = require("fs");
 module.exports = function(config, req, res) {
 	return (config["auto-responder"] || []).some(function(autoResponse) {
 		if (req.url.match(autoResponse.test)) {
-			sendResponse(res, autoResponse);
-			return true;
+			return sendResponse(res, autoResponse);
 		}
 	});
 };
@@ -18,19 +17,27 @@ function sendResponse(res, autoResponse) {
 		res.setHeader("Content-Type", autoResponse.contentType);
 	}
 	if (autoResponse.target) {
-		fs.createReadStream(getFileLocation(autoResponse)).pipe(res);
-		return true;
+		var fileLocation = getFileLocation(autoResponse);
+		if (fileLocation) {
+			fs.createReadStream(fileLocation).pipe(res);
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
 
 function getFileLocation(autoResponse) {
 	if (path.isAbsolute(autoResponse.target)) {
-		return autoResponse.target;
+		if (fs.existsSync(autoResponse.target)) {
+			return autoResponse.target;
+		}
+		return null;
 	}
 
 	var possiblePaths = [
 		path.join(".auto-respond", autoResponse.target),
-		path.join("~", ".auto-respond", autoResponse.target)
+		path.join(process.env.HOME, ".auto-respond", autoResponse.target)
 	];
 
 	return possiblePaths.filter(function(targetPath) {
