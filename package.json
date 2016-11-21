@@ -1,12 +1,12 @@
 {
-  "name": "auto-responder",
-  "version": "0.0.1",
-  "description": "Plugin for url-replace. It allows to return local files instead of calling server",
-  "main": "auto-responder.js",
+  "name": "pro-xy-auto-responder",
+  "version": "0.1.0",
+  "description": "Plugin for pro-xy. It allows to return local files instead of calling server",
+  "main": "lib/proxyAutoResponder.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": "https://github.com/zboro/auto-responder.git",
+  "repository": "https://github.com/adros/pro-xy-auto-responder.git",
   "author": "zboron.lukas@gmail.com",
   "license": "ISC"
 }
