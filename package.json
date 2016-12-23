@@ -1,6 +1,6 @@
 {
   "name": "pro-xy-auto-responder",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Plugin for pro-xy. It allows to return local files instead of calling server",
   "main": "lib/proxyAutoResponder.js",
   "scripts": {
