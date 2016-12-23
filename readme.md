@@ -20,11 +20,17 @@ This plugin is configured in url-replace config file by field "auto-responder".
 		"disabled": false,
 		"replaces": [
 			{
+                "disabled": false,
 				"urlPattern": "my/sample/url",
+				"target": "sompleFile.txt",
+                "method": "GET",
 				"status": 200,
-				"contentType": "application/json",
-				"target": "/home/myname/.pro-xyrc.json",
-                "disabled": false
+                "headers": {
+                    "server": "Apache-Coyote/1.1",
+                    "expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+                    "content-range": "items 0-14/*",
+                    "content-type": "application/json;charset=UTF-8"
+                }
 		    }
 		]
 	}
@@ -33,6 +39,7 @@ This plugin is configured in url-replace config file by field "auto-responder".
 
 - *urlPattern* - RegExp to be matched by URL
 - *status* - Status to be set to response
-- *contentType* - Content type to be set to response
+- *method* - If specified, auto response will be sent only if request's method matches
 - *target* - path to file to use as response. Path can be absolute or relative. If path is relative, ".auto-respond" folder in HOME is used to resolve it.
+- *headers* - map of HTTP headers that will be added to response
 - *disabled* - disable rule
